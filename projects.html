@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Jonas Sam Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/brands.min.css"
+        integrity="sha512-WxpJXPm/Is1a/dzEdhdaoajpgizHQimaLGL/QqUIAjIihlQqlPQb1V9vkGs9+VzXD7rgI6O+UsSKl4u5K36Ydw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        /* HEADER (same as About) */
+        .site-header {
+            padding: 1.5rem 1rem;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            text-decoration: none;
+        }
+
+        .logo-highlight {
+            color: #3b82f6;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: #3b82f6;
+        }
+
+        /* HERO (same gradient as About) */
+        .hero-section {
+            padding: 6rem 1rem 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+        }
+
+        .hero-copy {
+            color: #c7d2fe;
+            max-width: 700px;
+            margin: 1rem auto;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            margin-top: 1.5rem;
+        }
+
+        /* BUTTONS (same as About) */
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* CONTENT */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        /* ADD PROJECT PANEL */
+        .add-project-panel {
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .add-project-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .add-project-form input,
+        .add-project-form textarea {
+            padding: 0.9rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* PROJECT GRID */
+        .project-grid {
+            column-width: 300px;
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: 0.2s;
+            break-inside: avoid;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .editDeleteProjectContainer {
+            display: flex;
+            position: absolute;
+            top: 0;
+            right: 0;
+            justify-content: end;
+            padding: 12px;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .project-card:hover .editDeleteProjectContainer {
+            opacity: 1;
+        }
+
+        .editDeleteProjectContainer button {
+            cursor: pointer;
+            color: white;
+            border-radius: 8px;
+            padding-bottom: 4px;
+            padding-top: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .editProject {
+            background-color: #3b82f6;
+            border: none;
+        }
+
+        .deleteProject {
+            background-color: red;
+            border: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-card-content {
+            padding: 1.5rem;
+        }
+
+        .project-card h3 {
+            margin: 0 0 0.5rem;
+        }
+
+        .project-description {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .project-date {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* FOOTER */
+        .footer-section {
+            padding: 2rem;
+            background: #1e293b;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        .dropZone {
+            border: 2px solid;
+            border-style: dashed;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropZonePlaceholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: all 0.4s ease-in-out;
+            position: absolute;
+            backdrop-filter: blur(15px);
+            width: 100%;
+            height: 100%;
+        }
+
+        .dropZone:hover .dropZonePlaceholder {
+            opacity: 1;
+        }
+
+        .dropZonePlaceholder.hidden {
+            opacity: 0;
+        }
+
+        .dropZone i {
+            font-size: 100px;
+        }
+
+        .dropZone p {
+            text-align: center;
+        }
+
+        .upload-title {
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .upload-subtitle {
+            color: gray;
+        }
+
+        .saveAndCancelButtonContainer {
+            display: flex;
+            justify-content: end;
+            grid-column: 1/-1;
+            gap: 12px;
+        }
+
+        .saveAndCancelButtonContainer button {
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .saveProjectButton {
+            width: 144px;
+            background: #3b82f6;
+            border: none;
+        }
+
+        .noWayToSaveButton {
+
+        }
+
+        .sideHustleBackground {
+            position: fixed;
+            transform: translateX(350px);
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 350px;
+            /* background-image: url(kash.jpg); */
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sideHustleBackground.show {
+            transform: translateX(0);
+        }
+
+        .sideHustle {
+            backdrop-filter: blur(15px);
+            height: 100%;
+            width: 100%;
+            padding: 32px;
+        }
+
+        .sideHustle input,
+        .sideHustle textarea {
+            margin-bottom: 8px;
+            padding: 12px;
+            border: 2px solid #3b82f6;
+            outline: none;
+            border-radius: 12px;
+        }
+
+        .saveEditAndCalcelEditButtonContainer {
+            display: flex;
+            justify-content: end;
+            margin-top: 48px;
+            gap: 8px;
+        }
+
+        .saveEditAndCalcelEditButtonContainer button {
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .saveEdit {
+            background-color: #3b82f6;
+            border: 2px solid white;
+            color: white;
+            font-weight: 600;
+        }
+
+        .saveEdit:hover {
+            filter: brightness(.9);
+        }
+
+        .cancelEdit {
+            /* TODO */
+        }
+
+        .headline {
+            margin-bottom: 48px;
+            font-size: 24px;
+        }
+        
+        .sideHustleOverlayForClosing {
+            background-color: transparent;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .sideHustleOverlayForClosing.doYourJob {
+            pointer-events: all;
+        }
+
+        .delete-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.2s;
+        }
+
+        .delete-modal h3 {
+            margin-bottom: 12px;
+        }
+        
+        .delete-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .delete-modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 300px;
+            text-align: center;
+        }
+        
+        .delete-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 12px;
+            justify-content: end;
+        }
+        
+        #confirmDelete {
+            background: red;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+        }
+        
+        #cancelDelete {
+            background: #e2e8f0;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo"><span class="logo-highlight">Jo</span>Nas</a>
+            <nav class="nav">
+                <a href="index.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="projects.html">Projects</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-section">
+        <div class="hero-inner">
+            <h1 class="hero-title">My Projects</h1>
+            <p class="hero-copy">A curated collection of my best work showcasing design, development, and
+                problem-solving.</p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn-primary">View Projects</a>
+                <a href="index.html" class="btn-secondary">Back</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENT -->
+    <div class="container">
+
+        <!-- ADD PROJECT -->
+        <div class="add-project-panel">
+            <form class="add-project-form">
+                <h2>Add Project</h2>
+                <input type="text" id="title" placeholder="Project Title">
+                <input type="date" id="date" placeholder="Date">
+                <textarea id="description" placeholder="Description"></textarea>
+            </form>
+            <label class="dropZone" id="dropzone" for="fileInput">
+                <img id="previewImage" alt="">
+                <div class="dropZonePlaceholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor" width="100" height="100">
+                        <path
+                            d="M537.6 226.6C536.6 163.8 484.9 112 422.4 112c-27.8 0-53.3 10.5-72.7 27.7C330.4 101.4 293.7 80 252.8 80c-66.3 0-120 53.7-120 120 0 1.4 0 2.8 .1 4.2C61.1 215.5 0 276.1 0 352c0 88.4 71.6 160 160 160h352c70.7 0 128-57.3 128-128 0-64.1-47.1-117.2-108.4-125.4zM320 392c-6.1 0-12.2-2.3-16.9-7.1l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L296 310.1V224c0-13.3 10.7-24 24-24s24 10.7 24 24v86.1l31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-4.7 4.7-10.8 7.1-16.9 7.1z" />
+                    </svg>
+                    <div>
+                        <p class="upload-title">Upload your file</p>
+                        <p class="upload-subtitle">Drag & drop or click to browse</p>
+                    </div>
+                </div>
+            </label>
+            <div class="saveAndCancelButtonContainer">
+                <button class="noWayToSaveButton">No way</button>
+                <button class="saveProjectButton">Save</button>
+            </div>
+            <input type="file" hidden id="fileInput">
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="project-grid" id="projects">
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-section">
+        © 2026 Jonas Sam Portfolio
+    </footer>
+
+    <div class="sideHustleOverlayForClosing">
+    
+    </div>
+    <div class="sideHustleBackground">
+        <div class="sideHustle">
+            <h1 class="headline">Edit project</h1>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label for="">New title</label>
+                <input id="editTitle" type="text" placeholder="Enter new title">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label for="">Date</label>
+                <input id="editDate" type="date">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label for="">Description</label>
+                <textarea name="" id="editdescription"></textarea>
+            </div>
+            <div class="saveEditAndCalcelEditButtonContainer">
+                <button class="cancelEdit">Cancel</button>
+                <button class="saveEdit">Save changes</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="delete-modal">
+        <div class="delete-modal-content">
+            <h3>Delete Project</h3>
+            <p>Are you sure you want to delete this project?</p>
+    
+            <div class="delete-actions">
+                <button id="cancelDelete">Cancel</button>
+                <button id="confirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="index.js"></script>
+</body>
+
+</html>

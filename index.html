@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Jonas Sam Portfolio</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .page-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-header {
+            padding: 1.5rem 1rem;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .site-header .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            text-decoration: none;
+        }
+
+        .logo-highlight {
+            color: #3b82f6;
+            border: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: #3b82f6;
+        }
+
+        .hero-section {
+            padding: 6rem 1rem 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #e0e7ff;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 0;
+            color: #c7d2fe;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: 2px solid white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-container {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-section {
+            padding: 6rem 1rem;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1e293b;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #64748b;
+        }
+
+        .expertise-section {
+            padding: 6rem 1rem;
+            background: #f8fafc;
+        }
+
+        .expertise-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .expertise-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .expertise-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .expertise-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .expertise-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            padding: 6rem 1rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #c7d2fe;
+        }
+
+        .footer-section {
+            padding: 2rem 1rem;
+            background: #1e293b;
+            color: #94a3b8;
+        }
+
+        .footer-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-copy {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="index.html" class="logo"><span class="logo-highlight">Jo</span>Nas</a>
+                <nav class="nav">
+                    <a href="index.html">About</a>
+                    <a href="skills.html">Skills</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero-section">
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <h1 class="hero-title">Hi, I'm Jonas Sam</h1>
+                            <p class="hero-subtitle">Full-Stack Web Developer & Digital Creator</p>
+                            <p class="hero-description">I craft exceptional digital experiences that combine beautiful design with powerful functionality. With a passion for clean code and user-centered design, I help businesses and individuals bring their visions to life on the web.</p>
+                            <div class="hero-cta">
+                                <a href="projects.html" class="btn-primary">View My Work</a>
+                                <a href="contact.html" class="btn-secondary">Get In Touch</a>
+                            </div>
+                        </div>
+                        <div class="hero-image">
+                            <div class="image-container">
+                                <img src="backend/src/images/namshin.webp" alt="Jonas Sam - Web Developer" class="profile-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="container">
+                    <div class="about-grid">
+                        <div class="about-content">
+                            <h2>About Me</h2>
+                            <p>I'm a dedicated web developer with over 6 years of experience creating digital solutions that make a difference. My journey in web development began with a curiosity about how websites work, and it has evolved into a career focused on delivering high-quality, user-friendly applications.</p>
+                            <p>I specialize in modern web technologies and frameworks, always staying up-to-date with the latest trends and best practices. Whether it's building responsive websites, developing complex web applications, or optimizing user experiences, I approach each project with attention to detail and a commitment to excellence.</p>
+                            <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community. I believe in continuous learning and the power of collaboration to create something truly remarkable.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="expertise-section">
+                <div class="container">
+                    <h2>My Expertise</h2>
+                    <div class="expertise-grid">
+                        <div class="expertise-card">
+                            <div class="expertise-icon">💻</div>
+                            <h3>Front-End Development</h3>
+                            <p>Creating responsive, interactive user interfaces with HTML, CSS, JavaScript, and modern frameworks like React and Vue.js.</p>
+                        </div>
+                        <div class="expertise-card">
+                            <div class="expertise-icon">⚙️</div>
+                            <h3>Back-End Development</h3>
+                            <p>Building robust server-side applications and APIs using Node.js, PHP, Python, and various database technologies.</p>
+                        </div>
+                        <div class="expertise-card">
+                            <div class="expertise-icon">🎨</div>
+                            <h3>UI/UX Design</h3>
+                            <p>Designing intuitive user experiences and beautiful interfaces that prioritize usability and visual appeal.</p>
+                        </div>
+                        <div class="expertise-card">
+                            <div class="expertise-icon">🚀</div>
+                            <h3>Performance Optimization</h3>
+                            <p>Optimizing websites for speed, SEO, and performance to ensure fast loading times and excellent user experience.</p>
+                        </div>
+                        <div class="expertise-card">
+                            <div class="expertise-icon">📱</div>
+                            <h3>Mobile-First Design</h3>
+                            <p>Developing mobile-responsive websites that work seamlessly across all devices and screen sizes.</p>
+                        </div>
+                        <div class="expertise-card">
+                            <div class="expertise-icon">🔧</div>
+                            <h3>Maintenance & Support</h3>
+                            <p>Providing ongoing maintenance, updates, and technical support to keep your website running smoothly.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <div class="container">
+                    <div class="cta-content">
+                        <h2>Ready to Start Your Project?</h2>
+                        <p>Let's discuss your ideas and bring them to life. I'm here to help you create something amazing.</p>
+                        <a href="contact.html" class="btn-primary">Contact Me</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer-section">
+            <div class="footer-wrapper">
+                <div class="footer-copy">© 2024 Jonas Sam. All rights reserved.</div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
