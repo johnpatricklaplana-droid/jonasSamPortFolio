@@ -58,19 +58,30 @@ async function saveProject (image) {
 
     const url = "http://localhost:80/jonasSamPortFolio/backend/src/jonasSamindex.php/save-project"
 
-    multipartPOST(url, formData);
+    const result = await multipartPOST(url, formData);
+
+    if(result.status === 201) {
+        renderProjects();
+    }
 
 }
 
-(async () => {
-    
+const projectIds = [];
+
+async function renderProjects() {
     const url = "http://localhost/jonasSamPortFolio/backend/src/jonasSamindex.php/get-projects";
     const result = await GET(url);
 
     const projects = document.getElementById("projects");
 
     result.data.forEach(project => {
-        
+
+        if (projectIds.includes(project.id)) {
+            return;
+        }
+
+        projectIds.push(project.id);
+
         const box = `
             <div class="project-card" data-box-id="${project.id}">
                 <div class="editDeleteProjectContainer">
@@ -89,6 +100,11 @@ async function saveProject (image) {
         projects.insertAdjacentHTML("beforeend", box);
 
     });
+}
+
+(async () => {
+
+    renderProjects();
 
 }) ();
 
